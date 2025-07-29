@@ -23,7 +23,6 @@
  */
 
 namespace filter_simplequestion\privacy;
-defined('MOODLE_INTERNAL') || die();
 
 class provider implements
     // This plugin does not store any personal user data.
@@ -35,7 +34,7 @@ class provider implements
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }

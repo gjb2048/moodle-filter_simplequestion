@@ -41,7 +41,7 @@ class filter_simplequestion extends moodle_text_filter {
      * @param array $options filter options
      * @return string text after processing
      */
-    public function filter($text, array $options = array()) {
+    public function filter($text, array $options = []) {
         global $PAGE;
 
         // Basic test to avoid work.

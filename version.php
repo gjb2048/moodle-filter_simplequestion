@@ -26,10 +26,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018061200;
-$plugin->requires  = 2016052300;
+$plugin->version = 2025072900;
+$plugin->requires = 2024100700.00; // 4.5 (Build: 20241007).
+$plugin->supported = [405, 405];
 $plugin->component = 'filter_simplequestion';
 $plugin->maturity = MATURITY_BETA;
-// Upgrade to Moodle 3.5 inc GDPR.
-// Cleaning usages cron task updated.
-$plugin->release = 'v1.5.4';
+$plugin->release = 'V405.0.1';

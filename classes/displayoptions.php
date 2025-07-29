@@ -25,7 +25,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace filter_simplequestion;
-defined('MOODLE_INTERNAL') || die();
+
 /**
  * Control question display options
  */
@@ -37,7 +37,7 @@ class displayoptions  {
      */
     public static function get_options($maxvariant) {
 
-        $options = array();
+        $options = [];
         // Question options - note just 1 question in the attempt.
         $options = new question_display_options();
         $options->marks = question_display_options::MAX_ONLY;

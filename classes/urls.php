@@ -27,10 +27,9 @@
 
 namespace filter_simplequestion;
 
-use moodle_url;
+use core\url;
 use question_preview_options;
 
-defined('MOODLE_INTERNAL') || die();
 /**
  * Set up link url's and their parameters
  */
@@ -46,11 +45,17 @@ class urls  {
      */
     public static function preview_action_url($enid, $popup, $qubaid,
             question_preview_options $options, $courseid, $cmid, $modname) {
-        $params = array('id' => $enid, 'previewid' => $qubaid,
-                'courseid' => $courseid, 'cmid' => $cmid,
-                'popup' => $popup, 'modname' => $modname);
+        $params = [
+            'id' => $enid,
+            'previewid' => $qubaid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'popup' => $popup,
+            'modname' => $modname,
+        ];
         $params = array_merge($params, $options->get_url_params());
-        return new moodle_url('/filter/simplequestion/preview.php', $params);
+
+        return new url('/filter/simplequestion/preview.php', $params);
     }
     /**
      * Generate the URL for starting a new preview of a given question with the given options.
@@ -68,7 +73,7 @@ class urls  {
             $preferredbehaviour = null,
             $maxmark = null, $displayoptions = null,
             $variant = null, $courseid) {
-        $params = array('id' => $enid, 'courseid' => $courseid);
+        $params = ['id' => $enid, 'courseid' => $courseid];
         if (!is_null($preferredbehaviour)) {
             $params['behaviour'] = $preferredbehaviour;
         }
@@ -86,6 +91,6 @@ class urls  {
         if ($variant) {
             $params['variant'] = $variant;
         }
-        return new moodle_url('/filter/simplequestion/preview.php', $params);
+        return new url('/filter/simplequestion/preview.php', $params);
     }
 }

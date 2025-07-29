@@ -61,8 +61,9 @@ $maxvariant = min($question->get_num_variants(), QUESTION_PREVIEW_MAX_VARIANTS);
 $options = new question_preview_options($question);
 $options->behaviour = 'immediatefeedback';
 $pageurl = \filter_simplequestion\urls::preview_url($enid, $popup,
-            $options->behaviour, $options->maxmark,
-            $options, $options->variant, $courseid);
+    $options->behaviour, $options->maxmark,
+    $options, $options->variant, $courseid);
+
 $PAGE->set_url($pageurl);
 // Get and validate existing preview, or start a new one.
 $previewid = optional_param('previewid', 0, PARAM_INT);
@@ -73,8 +74,8 @@ if ($previewid) {
         // This may not seem like the right error message to display, but
         // actually from the user point of view, it makes sense.
         print_error('friendlymessage', 'filter_simplequestion',
-                preview_url($enid, $options->behaviour,
-                $options->maxmark, $options, $options->variant, $courseid), null, $e);
+            preview_url($enid, $options->behaviour,
+            $options->maxmark, $options, $options->variant, $courseid), null, $e);
     }
     $slot = $quba->get_first_question_number();
     $usedquestion = $quba->get_question($slot);
@@ -85,7 +86,7 @@ if ($previewid) {
     $options->variant = $quba->get_variant($slot);
 } else {
     $quba = question_engine::make_questions_usage_by_activity(
-            'filter_simplequestion', $context);
+        'filter_simplequestion', $context);
     $quba->set_preferred_behaviour($options->behaviour);
     $slot = $quba->add_question($question, $options->maxmark);
     if ($options->variant) {
@@ -100,9 +101,11 @@ if ($previewid) {
 }
 $options->behaviour = $quba->get_preferred_behaviour();
 $options->maxmark = $quba->get_question_max_mark($slot);
+
 // Prepare a URL that is used in various places.
 $actionurl = \filter_simplequestion\urls::preview_action_url(
-                 $enid, $popup, $quba->get_id(), $options, $courseid, $cmid, $modname);
+    $enid, $popup, $quba->get_id(), $options, $courseid, $cmid, $modname);
+
 // Process check button action.
 if (data_submitted() && confirm_sesskey()) {
     try {
@@ -122,30 +125,39 @@ if (data_submitted() && confirm_sesskey()) {
             $debuginfo = $e->debuginfo;
         }
         print_error('postsubmiterror', 'filter_simplequestion', $actionurl,
-                $e->getMessage(), $debuginfo);
+            $e->getMessage(), $debuginfo);
     }
 }
+
 // Start output.
-$title = get_string('previewquestion', 'filter_simplequestion',
-                format_string($question->name));
-    $PAGE->set_heading($title);
-    echo $OUTPUT->header();
-    // Start the simplified question form.
-    echo html_writer::start_tag('form', array('method' => 'post',
-                'action' => $actionurl, 'enctype' => 'multipart/form-data',
-                'id' => 'responseform'));
-    echo html_writer::start_tag('div');
-    echo html_writer::empty_tag('input', array('type' => 'hidden',
-                'name' => 'sesskey', 'value' => sesskey()));
-    echo html_writer::empty_tag('input', array('type' => 'hidden',
-                'name' => 'slots', 'value' => $slot));
-    echo html_writer::end_tag('div');
-    // Output the question.
-    echo $quba->render_question($slot, $options, 1);
-    echo html_writer::end_tag('form');
-    $PAGE->requires->js_module('core_question_engine');
-    $PAGE->requires->strings_for_js(array(
+$title = get_string('previewquestion', 'filter_simplequestion', format_string($question->name));
+$PAGE->set_heading($title);
+echo $OUTPUT->header();
+
+// Start the simplified question form.
+echo html_writer::start_tag('form', [
+    'method' => 'post',
+    'action' => $actionurl,
+    'enctype' => 'multipart/form-data',
+    'id' => 'responseform']
+);
+echo html_writer::start_tag('div');
+echo html_writer::empty_tag('input', array('type' => 'hidden',
+    'name' => 'sesskey', 'value' => sesskey()));
+echo html_writer::empty_tag('input', array('type' => 'hidden',
+    'name' => 'slots', 'value' => $slot));
+echo html_writer::end_tag('div');
+
+// Output the question.
+echo $quba->render_question($slot, $options, 1);
+echo html_writer::end_tag('form');
+
+$PAGE->requires->js_module('core_question_engine');
+$PAGE->requires->strings_for_js([
     'closepreview',
-    ), 'question');
-    $PAGE->requires->yui_module('moodle-question-preview', 'M.question.preview.init');
-    $renderer->display_controls($popup);
+    ], 
+    'question'
+);
+
+$PAGE->requires->yui_module('moodle-question-preview', 'M.question.preview.init');
+$renderer->display_controls($popup);
