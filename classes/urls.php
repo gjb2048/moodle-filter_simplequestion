@@ -33,7 +33,7 @@ use question_preview_options;
 /**
  * Set up link url's and their parameters
  */
-class urls  {
+class urls {
     /**
      * The the URL to use for actions relating to this preview.
      * @param string $enid the encrypted id of the question being previewed.
@@ -69,10 +69,15 @@ class urls  {
      * @param integer $courseid course to run the preview within.
      * @return moodle_url the URL.
      */
-    public static function preview_url($enid, $popup,
-            $preferredbehaviour = null,
-            $maxmark = null, $displayoptions = null,
-            $variant = null, $courseid) {
+    public static function preview_url(
+        $enid,
+        $popup,
+        $preferredbehaviour,
+        $maxmark,
+        $displayoptions,
+        $variant,
+        $courseid) {
+
         $params = ['id' => $enid, 'courseid' => $courseid];
         if (!is_null($preferredbehaviour)) {
             $params['behaviour'] = $preferredbehaviour;

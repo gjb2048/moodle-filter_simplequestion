@@ -38,11 +38,9 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
-
 function filter_simplequestion_question_pluginfile($course, $context, $component,
          $filearea, $qubaid, $slot, $args,
-         $forcedownload, array $options = array()) {
+         $forcedownload, array $options = []) {
 
     $fs = get_file_storage();
     $relativepath = implode('/', $args);

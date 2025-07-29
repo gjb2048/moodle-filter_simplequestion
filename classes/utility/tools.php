@@ -27,16 +27,14 @@
  * Modifed by Richard Jones, https://richardnz.net
  *
  * https://stackoverflow.com/questions/24350891/how-to-encrypt-decrypt-an-integer-in-php
- *
  */
 
 namespace filter_simplequestion\utility;
 
-defined('MOODLE_INTERNAL') || die();
 /**
  * Functions to encrypt and decrypt an integer
  */
-class tools  {
+class tools {
     /**
      * Encrypt an integer using a simple key of alphabetical characters.
      * The encoded number must be alphabetical since it is going to be used in a css id.

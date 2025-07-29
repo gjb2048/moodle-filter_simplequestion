@@ -74,8 +74,7 @@ if ($previewid) {
         // This may not seem like the right error message to display, but
         // actually from the user point of view, it makes sense.
         print_error('friendlymessage', 'filter_simplequestion',
-            preview_url($enid, $options->behaviour,
-            $options->maxmark, $options, $options->variant, $courseid), null, $e);
+            $pageurl, null, $e);
     }
     $slot = $quba->get_first_question_number();
     $usedquestion = $quba->get_question($slot);
@@ -142,10 +141,10 @@ echo html_writer::start_tag('form', [
     'id' => 'responseform']
 );
 echo html_writer::start_tag('div');
-echo html_writer::empty_tag('input', array('type' => 'hidden',
-    'name' => 'sesskey', 'value' => sesskey()));
-echo html_writer::empty_tag('input', array('type' => 'hidden',
-    'name' => 'slots', 'value' => $slot));
+echo html_writer::empty_tag('input', ['type' => 'hidden',
+    'name' => 'sesskey', 'value' => sesskey()]);
+echo html_writer::empty_tag('input', ['type' => 'hidden',
+    'name' => 'slots', 'value' => $slot]);
 echo html_writer::end_tag('div');
 
 // Output the question.

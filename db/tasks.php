@@ -24,15 +24,16 @@
  *
  */
 defined('MOODLE_INTERNAL') || die();
-$tasks = array(
+$tasks = [
     // The cron will delete all simplequestion records.
     // Run every 10 minutes - normally won't have much to do.
-    array('classname' => 'filter_simplequestion\task\simplequestion_cron',
-            'blocking' => 0,
-            'minute' => '*/10',
-            'hour' => '*',
-            'day' => '*',
-            'dayofweek' => '*',
-            'month' => '*'
-    )
-);
+    [
+        'classname' => 'filter_simplequestion\task\simplequestion_cron',
+        'blocking' => 0,
+        'minute' => '*/10',
+        'hour' => '*',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*',
+    ]
+];
